@@ -6,18 +6,21 @@ import collections
 #                                *
 #*********************************
 ### List of histos to include in the root files
-histos = { #"SR":"h_jets_best_Wprime_m_selection_AND_best_topjet_isbtag_AND_best_Wpjet_isbtag_AND_best_top_m_G_120_AND_best_top_m_L_220_AND_deltaR_bestWAK4_closestAK8_L_0p4_AND_WprAK8_mSD_L_60", "CRTT":"h_jets_best_Wprime_m_selection_AND_best_topjet_isbtag_AND_best_Wpjet_isbtag_EQ_0_AND_best_top_m_G_120_AND_best_top_m_L_220_AND_deltaR_bestWAK4_closestAK8_L_0p4_AND_WprAK8_mSD_L_60", "CRWJ":"h_jets_best_Wprime_m_selection_AND_best_topjet_isbtag_EQ_0_AND_best_Wpjet_isbtag_AND_best_top_m_G_120_AND_best_top_m_L_220_AND_deltaR_bestWAK4_closestAK8_L_0p4_AND_WprAK8_mSD_L_60"
+histos = { "SR":"h_jets_best_Wprime_m_selection_AND_best_topjet_isbtag_AND_best_Wpjet_isbtag_AND_best_top_m_G_120_AND_best_top_m_L_220_AND_deltaR_bestWAK4_closestAK8_L_0p4_AND_WprAK8_mSD_L_60", "CRTT":"h_jets_best_Wprime_m_selection_AND_best_topjet_isbtag_AND_best_Wpjet_isbtag_EQ_0_AND_best_top_m_G_120_AND_best_top_m_L_220_AND_deltaR_bestWAK4_closestAK8_L_0p4_AND_WprAK8_mSD_L_60", "CRWJ":"h_jets_best_Wprime_m_selection_AND_best_topjet_isbtag_EQ_0_AND_best_Wpjet_isbtag_AND_best_top_m_G_120_AND_best_top_m_L_220_AND_deltaR_bestWAK4_closestAK8_L_0p4_AND_WprAK8_mSD_L_60",
     "CR0B":"h_jets_best_Wprime_m_selection_AND_best_topjet_isbtag_EQ_0_AND_best_Wpjet_isbtag_EQ_0_AND_nbjet_pt100_EQ_0_AND_best_top_m_G_120_AND_best_top_m_L_220_AND_deltaR_bestWAK4_closestAK8_L_0p4_AND_WprAK8_mSD_L_60"
 }
+
 ### List of regions for which creating the datacards
 channels = ["SR_muon", "CRTT_muon", "CRWJ_muon", "SR_electron", "CRTT_electron", "CRWJ_electron"]
 leptons = ['muon', 'electron']
-channels = ["CR0B_muon", "CR0B_electron"]
-leptons = ['muon', 'electron']
+#leptons = ['muon']
+#channels = ["CR0B_muon", "CR0B_electron", "SR_muon", "CRTT_muon", "CRWJ_muon", "SR_electron", "CRTT_electron", "CRWJ_electron"]
+#channels = ["CR0B_muon", "CR0B_electron"]
+#leptons = ['muon', 'electron']
 #channels = ["CR0B_muon"]
 #leptons = ['muon']
-#channels = ["CR0B_electron"]
-#leptons = ['electron']
+channels = ["CR0B_electron"]
+leptons = ['electron']
 
 channels_labels = {"SR":"Signal region", "CRTT":"\ttbar Control region", "CRWJ":"wjets Control region"}
 #channels_labels = {"CR0B":"0 b-jet control region"}
@@ -26,7 +29,7 @@ class rateParam(object):
     pass
 
 rateParams = {}
-
+'''
 DD_rate_2016 = rateParam()
 DD_rate_2016.chs = channels
 DD_rate_2016.bkg = "DDFitWJetsTT_MttST"
@@ -51,6 +54,22 @@ DD_ele_rate_2018 = rateParam()
 DD_ele_rate_2018.chs = channels
 DD_ele_rate_2018.bkg = "DDFitWJetsTT_MttST"
 rateParams["DD_ele_rate_2018"] = DD_ele_rate_2018
+'''
+DD_mu_rate_2020 = rateParam()
+DD_mu_rate_2020.chs = channels
+DD_mu_rate_2020.bkg = "DDFitWJetsTT_MttST"
+rateParams["DD_mu_rate"] = DD_mu_rate_2020
+
+qcd_mu_rate_2020 = rateParam()
+qcd_mu_rate_2020.chs = channels
+qcd_mu_rate_2020.bkg = "QCD"
+rateParams["qcd_mu_rate"] = qcd_mu_rate_2020
+
+DD_ele_rate_2020 = rateParam()
+DD_ele_rate_2020.chs = channels
+DD_ele_rate_2020.bkg = "DDFitWJetsTT_MttST"
+rateParams["DD_ele_rate"] = DD_ele_rate_2020
+
 
 #TT_rate = rateParam()
 #TT_rate.chs = ["SR_muon", "CRTT_muon", "CRWJ_muon", "SR_electron", "CRTT_electron", "CRWJ_electron"]
@@ -67,7 +86,7 @@ rateParams["DD_ele_rate_2018"] = DD_ele_rate_2018
 #       List of backgrounds      *
 #                                *
 #*********************************
-#processes = ["ST", "QCD", "TT_Mtt", "WJets"]
+processes = ["ST", "QCD", "TT_Mtt", "WJets"]
 #processes = ["ST", "QCD", "DDWJetsTT_Mtt"]
 processes = ["QCD", "DDFitWJetsTT_MttST"]
 bkgs = []
@@ -78,35 +97,36 @@ bkgs = []
 #                                *
 #*********************************
 syst = collections.OrderedDict()
-syst["lumi_2016"] = ["lnN", "all", 1.025]
-syst["lumi_2017"] = ["lnN", "all", 1.023]
-syst["lumi_2018"] = ["lnN", "all", 1.025]
-syst["qcd_rate"] = ["lnN", "QCD", 1.25]
-#syst["lumi_2018"] = ["lnN", "all", 1.023]
-#syst["trigger"] = ["lnN", "all", 1.02]
-#syst["trigSF"] = ["shape", ["sig"]]
-#syst["trigSF"] = ["lnN", ["sig",sigTTW, sigZ, "QCD", "SingleTop"]]
-#syst["jes"] = ["shape", ("QCD", "TT_Mtt", "WJets", "sig")]
+#syst["lumi_2016"] = ["lnN", "all", 1.025]
+#syst["lumi_2017"] = ["lnN", "all", 1.023]
+#syst["lumi_2018"] = ["lnN", "all", 1.025]
+syst["lumi"] = ["lnN", "all", 1.018]
+syst["qcd_rate"] = ["lnN", "QCD", 1.5]
+''' #systs for MC 2020
+syst["jes2016"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["jer2016"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["lep2016"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["trig2016"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["PF2016"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["btag2016"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["mistag2016"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["jes2017"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["jer2017"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["lep2017"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["trig2017"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["PF2017"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["btag2017"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["mistag2017"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["jes2018"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["jer2018"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["lep2018"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["trig2018"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["PF2018"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["btag2018"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+syst["mistag2018"] = ["shape", ("QCD", "TT_Mtt", "WJets", "ST", "sig")]
+'''
 
-#syst["autoMCstat"] = ["shape", ("QCD", "ST", "TT_Mtt", "WJets", "sig")]
-#syst["PF"] = ["shape", ("QCD", "ST", "TT_Mtt", "WJets", "sig")]
-#syst["pu"] = ["shape", ("QCD", "ST", "TT_Mtt", "WJets", "sig")]
-#syst["jes"] = ["shape", ("QCD", "ST", "TT_Mtt", "WJets", "sig")]
-#syst["jer"] = ["shape", ("QCD", "ST", "TT_Mtt", "WJets", "sig")]
-'''
-#syst["autoMCstat"] = ["shape", ("QCD", "ST", "DDWJetsTT_Mtt", "sig")]
-syst["PF"] = ["shape", ("QCD", "ST", "DDWJetsTT_Mtt", "sig")]
-syst["pu"] = ["shape", ("QCD", "ST", "DDWJetsTT_Mtt", "sig")]
-#syst["lep"] = ["shape", ("QCD", "ST", "DDWJetsTT_Mtt", "sig")]
-#syst["trig"] = ["shape", ("QCD", "ST", "DDWJetsTT_Mtt", "sig")]
-syst["jes"] = ["shape", ("QCD", "ST", "DDWJetsTT_Mtt", "sig")]
-syst["jer"] = ["shape", ("QCD", "ST", "DDWJetsTT_Mtt", "sig")]
-syst["btag"] = ["shape", ("QCD", "ST", "DDWJetsTT_Mtt", "sig")]
-syst["mistag"] = ["shape", ("QCD", "ST", "DDWJetsTT_Mtt", "sig")]
-syst["TT_Mtt"] = ["shape", ("QCD", "ST", "DDWJetsTT_Mtt", "sig")]
-syst["WJets"] = ["shape", ("QCD", "ST", "DDWJetsTT_Mtt", "sig")]
-'''
-#syst["autoMCstat"] = ["shape", ("QCD", "ST", "DDWJetsTT_Mtt", "sig")]
+''' #systs for dd in separate years
 syst["PF"] = ["shape", ("QCD",  "sig")]
 syst["pu"] = ["shape", ("QCD",  "sig")]
 syst["lep"] = ["shape", ("QCD",  "sig")]
@@ -140,8 +160,37 @@ syst["TF_ele_2018"] = ["shape", ("DDFitWJetsTT_MttST")]
 syst["DD_ele_2018"] = ["shape", ("DDFitWJetsTT_MttST")]
 syst["Alt_ele_2018"] = ["shape", ("DDFitWJetsTT_MttST")]
 #syst["AltBis_2018"] = ["shape", ("DDFitWJetsTT_MttST")]
+'''
 
-years = ["2018"]
+syst["PF"] = ["shape", ("QCD",  "sig")]
+syst["pu"] = ["shape", ("QCD",  "sig")]
+syst["lep_ele_"] = ["shape", ("QCD",  "sig")]
+syst["lep_mu_"] = ["shape", ("QCD",  "sig")]
+syst["trig_ele_"] = ["shape", ("QCD",  "sig")]
+syst["trig_mu_"] = ["shape", ("QCD",  "sig")]
+syst["jes"] = ["shape", ("QCD",  "sig")]
+syst["jer"] = ["shape", ("QCD",  "sig")]
+syst["btag"] = ["shape", ("QCD",  "sig")]
+syst["mistag"] = ["shape", ("QCD",  "sig")]
+syst["pdf_total"] = ["shape", ("QCD",  "sig")]
+
+syst["Altmu"] = ["shape", ("DDFitWJetsTT_MttST")]
+syst["Altele"] = ["shape", ("DDFitWJetsTT_MttST")]
+syst["DDmu"] = ["shape", ("DDFitWJetsTT_MttST")]
+syst["DDele"] = ["shape", ("DDFitWJetsTT_MttST")]
+syst["TFmu"] = ["shape", ("DDFitWJetsTT_MttST")]
+syst["TFele"] = ["shape", ("DDFitWJetsTT_MttST")]
+syst["TT_Mtt_mu"] = ["shape", ("DDFitWJetsTT_MttST")]
+syst["TT_Mtt_ele"] = ["shape", ("DDFitWJetsTT_MttST")]
+syst["WJets_mu"] = ["shape", ("DDFitWJetsTT_MttST")]
+syst["WJets_ele"] = ["shape", ("DDFitWJetsTT_MttST")]
+syst["ST_mu"] = ["shape", ("DDFitWJetsTT_MttST")]
+syst["ST_ele"] = ["shape", ("DDFitWJetsTT_MttST")]
+
+#syst["AltTFmu"] = ["shape", ("DDFitWJetsTT_MttST")]
+#syst["AltTFele"] = ["shape", ("DDFitWJetsTT_MttST")]
+
+years = ["2020"]
 #years = ["2016","2017","2018"]
 '''
 splityearjes=False

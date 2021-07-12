@@ -10,6 +10,16 @@ parser.add_option("-s","--suffix",dest="suffix",type="string",default="",help="s
 parser.add_option("-d","--datacarddir",dest="datacarddir",type="string",default="outstatNovFull",help="datacard directory")
 (opt, args) = parser.parse_args()
 
+folder = "fit_fullrun2_DD_topmass120_220"
+folder = "fit_2018_DD_topmass120_220_noMCstats"
+folder = "fit_v15_fullrun2_DD_DDFitWJetsTT_MttST"
+folder = 'fit_v16_fullrun2_DD_DDFitWJetsTT_MttST'
+folder = 'SR_all_comb_09Mar21_plot_newfit_07Mar21_split_rateparam'
+folder = '05Jul21_dd_summedyears_SR'
+folder = '07Jul21_dd_summedyears_CR_explin'
+folder = '07Jul21_dd_summedyears_SR_explin_bis_test/'
+folder = '12Jul21_dd_summedyears_SR_explin_v3'
+
 mass_points = ['WP_M2000W20_RH', 'WP_M4000W40_RH', 'WP_M6000W60_RH']
 signifs = ["","_1s","_limit","_3s","_5s"]
 r_in = {'WP_M2000W20_RH':[0, 1, 3, 5, 10], 'WP_M4000W40_RH':[0, 1, 3, 5, 10], 'WP_M6000W60_RH':[0, 1, 5, 10, 20]}
@@ -40,12 +50,6 @@ if "R" in mode:
     read=True
     saveplots=True
 datacarddir=opt.datacarddir
-folder = "fit_fullrun2_DD_topmass120_220"
-folder = "fit_2018_DD_topmass120_220_noMCstats"
-folder = "fit_v15_fullrun2_DD_DDFitWJetsTT_MttST"
-folder = 'fit_v16_fullrun2_DD_DDFitWJetsTT_MttST'
-folder = 'SR_all_comb_09Mar21_plot_newfit_07Mar21_split_rateparam'
-
 
 ROOT.gStyle.SetOptFit(1)
 gen_options = "--saveToys --toysFrequentist --bypassFrequentistFit "
@@ -83,7 +87,7 @@ for mi in xrange(0, len(mass_points)):
                 h.Draw("E")
                 func.Draw("SAME")
                 c1.Update()
-                c1.SaveAs("pulls_"+str(r)+"_"+mass_point+suffix+"_v16.png")
+                c1.SaveAs("pulls_"+str(r)+"_"+mass_point+suffix+"_v17.png")
             pulls_fit[mi][ri] = func.GetParameter(1)
             sigmas_fit[mi][ri] = func.GetParameter(2)
             pulls[mi][ri] = h.GetMean()

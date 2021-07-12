@@ -186,9 +186,13 @@ def getCard(sig, ch, ifilename, outdir, mode = "histo", unblind = False):
        card += "-----------------------------------------------------------------------------------\n"
        for sysName,sysValue  in syst.iteritems():
               print "Systematic Uncertainty: ", sysName
-              if("2016" in sysName and "2016" not in ch): continue
-              elif("2017" in sysName and "2017" not in ch): continue
-              elif("2018" in sysName and "2018" not in ch): continue
+              if not '2020' in ch:
+                     if("2016" in sysName and "2016" not in ch):
+                            continue
+                     elif("2017" in sysName and "2017" not in ch):
+                            continue
+                     elif("2018" in sysName and "2018" not in ch):
+                            continue
               if("mu" in sysName and "mu" not in ch): continue
               elif("ele" in sysName and "ele" not in ch): continue
               if(sysValue[0]=="lnN"): 
@@ -271,6 +275,17 @@ def getCard(sig, ch, ifilename, outdir, mode = "histo", unblind = False):
        # End for loop on syst unc.       
        for k, v in rateParams.items():
               for ch_ in v.chs:
+                     '''
+                     if('2016' not in ch_ and '2017' not in ch_ and '2018' not in ch_):
+                            if (ch_==("_").join(ch.split("_")[:-1])): 
+                                   if(("2016" in k) or ("2017" in k) or ("2018" in k)):
+                                          if ('mu' in k and 'mu' in ch):
+                                                 card += "%-20s%-20s%-20s%-20s%-20d\n" % (k, "rateParam", ch, v.bkg, 1)
+                                          elif ('ele' in k and 'ele' in ch):
+                                                 card += "%-20s%-20s%-20s%-20s%-20d\n" % (k, "rateParam", ch, v.bkg, 1)
+                                   else:
+                                          card += "%-20s%-20s%-20s%-20s%-20d\n" % (k, "rateParam", ch, v.bkg, 1)
+                     '''
                      if("2016" in k and "2016" not in ch):
                             continue
                      elif("2017" in k and "2017" not in ch):

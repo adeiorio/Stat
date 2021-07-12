@@ -1,12 +1,14 @@
 import os
 
-folder='CR0B_2018_comb_23Mar21_plot_newfit_23Mar21_split_rateparam'
-year = '2018'
-histo_rep = '/eos/user/a/adeiorio/Wprime/nosynch/v16/plot_fit7/'
-fit = 1
-fit_diag = 0
+folder = '12Jul21_dd_summedyears_CREle_explin_v3'
+year = '2020'
+histo_rep = '/eos/user/a/adeiorio/Wprime/nosynch/v17/plot_fit_ddsummed_explin_bis/'
+histo_rep = '/eos/user/a/adeiorio/Wprime/nosynch/v17/plot_fit_ddsummed_explin_v3/'
+fit = 0
+fit_diag = 1
 impact = 0
-gof = 1
+pull = 1
+gof = 0
 unblind = 1
 
 if fit:
@@ -32,16 +34,30 @@ metadatacard_out = folder + '/' + signal +'/'+ signal + '_hist'
 if fit_diag:
     os.system("combine -M FitDiagnostics " + metadatacard_out + ".txt --saveShapes --saveWithUncertainties --plots --saveNormalizations --robustFit 1 --customStartingPoint --stepSize 0.004 --out " + folder + " --profilingMode all --keepFailures  --autoBoundsPOIs r")
 
+if pull:
+    print "Making pull distributions ..."
+    os.system("./make_pulls.sh " + folder +"/fitDiagnostics.root")
+    os.system("cat pulls.txt")
+    os.system("python pulls.py -f pulls.txt")
+    os.system("mv pulls.txt "+folder+"/pulls_"+ signal + ".txt") 
+    os.system("mv pulls.tex "+folder+"/pulls_"+ signal + ".tex") 
+    os.system("mv pulls_no_binbybin.png "+folder+"/pulls_"+ signal +".png") 
+    os.system("mv rho_no_binbybin.png "+folder+"/rho_"+ signal + ".png")
+    os.system("mv pulls_no_binbybin.pdf "+folder+"/pulls_"+ signal + ".pdf") 
+    os.system("mv rho_no_binbybin.pdf "+folder+"/rho_"+ signal + ".pdf")
+    #os.system("python rateParam.py -L "+folder+" "+opt.lep+"/mlfit.root >& "+opt.lep+"/infoPF_"+ signal + "_"+opt.lep+".log ")
+    #os.system("cat "+opt.lep+"/infoPF_"+ signal + "_"+opt.lep+".log")
+
 # do impact plot?
 if impact:
     os.system('text2workspace.py ' + metadatacard_out + '.txt -m 125')
-    fit_option = '--autoBoundsPOIs r  --autoRange 1'
+    fit_option = '--autoBoundsPOIs r  --autoRange 1 '
     os.system("combineTool.py -M Impacts -d  " + metadatacard_out + ".root -m 125 --robustFit 1 --doInitialFit " + fit_option) # 
     os.system("combineTool.py -M Impacts -d  " + metadatacard_out + ".root -m 125 --robustFit 1 --doFits " + fit_option) #--autoBoundsPOIs r  --autoRange 1 --parallel 4
     os.system("combineTool.py -M Impacts -d  " + metadatacard_out + ".root -m 125 -o prova.json")
     os.system("plotImpacts.py -i prova.json -o impacts")
     os.system("rm prova.json")
-    #os.system("mv impacts.pdf "+opt.lep+"/impacts_"+opt.process+"_"+opt.lep+".pdf")
+    #os.system("mv impacts.pdf "+opt.lep+"/impacts_"+ signal + "_"+opt.lep+".pdf")
 
 # do gof test?
 suffix = folder
