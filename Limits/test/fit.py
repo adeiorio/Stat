@@ -1,15 +1,16 @@
 import os
 
-folder = '12Jul21_dd_summedyears_CREle_explin_v3'
+folder = '17Jul21_dd_summedyears_SR_explin_v4'
 year = '2020'
 histo_rep = '/eos/user/a/adeiorio/Wprime/nosynch/v17/plot_fit_ddsummed_explin_bis/'
+histo_rep = '/eos/user/a/adeiorio/Wprime/nosynch/v17/plot_fit_ddsummed_explin_v4/'
 histo_rep = '/eos/user/a/adeiorio/Wprime/nosynch/v17/plot_fit_ddsummed_explin_v3/'
-fit = 0
-fit_diag = 1
-impact = 0
-pull = 1
+fit = 1
+fit_diag = 0
+impact = 1
+pull = 0
 gof = 0
-unblind = 1
+unblind = 0
 
 if fit:
     if unblind:
@@ -27,7 +28,7 @@ if fit:
         os.system('python getLimitData.py -d ' + folder) #--runSingleCat
         os.system('python brazilPlot.py  -l ' + folder + ' -y ' + str(year)) #--runSingleCat
 
-signal = 'WP_M4000W40_RH'
+signal = 'WP_M2000W20_RH'
 metadatacard_out = folder + '/' + signal +'/'+ signal + '_hist'
 
 #do fit diagonistics

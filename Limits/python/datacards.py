@@ -200,11 +200,13 @@ def getCard(sig, ch, ifilename, outdir, mode = "histo", unblind = False):
                      if(sysValue[1]=="all" and len(sysValue)>2):
                             if(mode == "template"): card += "%-20s" % (sysValue[2]) * (2)
                             else:  card += "%-20s" % (sysValue[2]) * (len(processes) + 1)
-                     elif(sysValue[1]=="QCD" and len(sysValue)>2):
-                            if(mode == "template"):
-                                   card += "%-20s" % (sysValue[2]) * (2)
-                            else: 
-                                   card += "%-20s" % (sysValue[2]) * (len(processes) + 1)
+                     elif(sysValue[1]!="all" and len(sysValue)>2):
+                            card += "%-20s" % ("-") # this is for the signal
+                            for p in processes:
+                                   if (p in sysValue[1]):
+                                          card += "%-20s" % (sysValue[2])
+                                   else:
+                                          card += "%-20s" % ("-")
                      else:
                             if (sysValue[1]=="all"):
                                    sysValue[1] = copy.deepcopy(processes)
