@@ -1,0 +1,47 @@
+Combination of CR0B_muon=WP_M6000W60_RH_CR0B_muon_2020_hist.txt  CR0B_electron=WP_M6000W60_RH_CR0B_electron_2020_hist.txt
+imax 2 number of bins
+jmax 2 number of processes minus 1
+kmax 27 number of nuisance parameters
+----------------------------------------------------------------------------------------------------------------------------------
+shapes *              CR0B_electron  /afs/cern.ch/work/a/adeiorio/CMSSW_10_2_5/src/Stat/Limits/test/histo2020.root CR0B_electron_2020/$PROCESS CR0B_electron_2020/$PROCESS_$SYSTEMATIC
+shapes data_obs       CR0B_electron  /afs/cern.ch/work/a/adeiorio/CMSSW_10_2_5/src/Stat/Limits/test/histo2020.root CR0B_electron_2020/$PROCESS
+shapes *              CR0B_muon      /afs/cern.ch/work/a/adeiorio/CMSSW_10_2_5/src/Stat/Limits/test/histo2020.root CR0B_muon_2020/$PROCESS CR0B_muon_2020/$PROCESS_$SYSTEMATIC
+shapes data_obs       CR0B_muon      /afs/cern.ch/work/a/adeiorio/CMSSW_10_2_5/src/Stat/Limits/test/histo2020.root CR0B_muon_2020/$PROCESS
+----------------------------------------------------------------------------------------------------------------------------------
+bin          CR0B_muon      CR0B_electron
+observation  8310           5371         
+----------------------------------------------------------------------------------------------------------------------------------
+bin                               CR0B_muon           CR0B_muon           CR0B_muon           CR0B_electron       CR0B_electron       CR0B_electron     
+process                           WP_M6000W60_RH      QCD                 DDFitWJetsTT_MttST  WP_M6000W60_RH      QCD                 DDFitWJetsTT_MttST
+process                           0                   1                   2                   0                   1                   2                 
+rate                              0.942771            486.52              8534.31             0.259866            184.62              5898.49           
+----------------------------------------------------------------------------------------------------------------------------------
+AltTFele                shape     -                   -                   -                   -                   -                   1.0               
+AltTFmu                 shape     -                   -                   1.0                 -                   -                   -                 
+Altele                  shape     -                   -                   -                   -                   -                   1.0               
+Altmu                   shape     -                   -                   1.0                 -                   -                   -                 
+DDele                   shape     -                   -                   -                   -                   -                   1.0               
+DDmu                    shape     -                   -                   1.0                 -                   -                   -                 
+PF                      shape     1.0                 1.0                 -                   1.0                 1.0                 -                 
+ST_ele                  shape     -                   -                   -                   -                   -                   1.0               
+ST_mu                   shape     -                   -                   1.0                 -                   -                   -                 
+TFele                   shape     -                   -                   -                   -                   -                   1.0               
+TFmu                    shape     -                   -                   1.0                 -                   -                   -                 
+TT_Mtt_ele              shape     -                   -                   -                   -                   -                   1.0               
+TT_Mtt_mu               shape     -                   -                   1.0                 -                   -                   -                 
+WJets_ele               shape     -                   -                   -                   -                   -                   1.0               
+WJets_mu                shape     -                   -                   1.0                 -                   -                   -                 
+btag                    shape     1.0                 1.0                 -                   1.0                 1.0                 -                 
+jer                     shape     1.0                 1.0                 -                   1.0                 1.0                 -                 
+jes                     shape     1.0                 1.0                 -                   1.0                 1.0                 -                 
+lep_ele                 shape     -                   -                   -                   1.0                 1.0                 -                 
+lep_mu                  shape     1.0                 1.0                 -                   -                   -                   -                 
+lumi                    lnN       -                   1.018               -                   -                   1.018               -                 
+mistag                  shape     1.0                 1.0                 -                   1.0                 1.0                 -                 
+pdf_total               shape     1.0                 1.0                 -                   1.0                 1.0                 -                 
+pu                      shape     1.0                 1.0                 -                   1.0                 1.0                 -                 
+qcd_rate                lnN       -                   1.25                -                   -                   1.25                -                 
+trig_ele                shape     -                   -                   -                   1.0                 1.0                 -                 
+trig_mu                 shape     1.0                 1.0                 -                   -                   -                   -                 
+DD_ele_rate   rateParam CR0B_electron DDFitWJetsTT_MttST 1  
+DD_mu_rate    rateParam CR0B_muon DDFitWJetsTT_MttST 1  

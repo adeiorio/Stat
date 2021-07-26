@@ -1,0 +1,35 @@
+imax 1 number of channels 
+jmax * number of backgrounds 
+kmax * number of nuisance parameters
+-----------------------------------------------------------------------------------
+shapes   *      *   /afs/cern.ch/work/a/adeiorio/CMSSW_10_2_5/src/Stat/Limits/test/histo2020.root    $CHANNEL/$PROCESS    $CHANNEL/$PROCESS_$SYSTEMATIC
+shapes   data_obs      *   /afs/cern.ch/work/a/adeiorio/CMSSW_10_2_5/src/Stat/Limits/test/histo2020.root    $CHANNEL/$PROCESS
+-----------------------------------------------------------------------------------
+bin               CR0B_muon_2020
+observation       8310
+-----------------------------------------------------------------------------------
+bin                                     CR0B_muon_2020                             CR0B_muon_2020                             CR0B_muon_2020                             
+process                                 WP_M5000W50_RH                             QCD                                        DDFitWJetsTT_MttST                         
+process                                 0                                          1                                          2                                          
+rate                                    3.651697                                   486.52                                     8534.31                                    
+-----------------------------------------------------------------------------------
+lumi                lnN                 -                   1.018               -                   
+qcd_rate            lnN                 -                   1.25                -                   
+PF                       shape     1                   1                   -                   
+pu                       shape     1                   1                   -                   
+lep_mu                   shape     1                   1                   -                   
+trig_mu                  shape     1                   1                   -                   
+jes                      shape     1                   1                   -                   
+jer                      shape     1                   1                   -                   
+btag                     shape     1                   1                   -                   
+mistag                   shape     1                   1                   -                   
+pdf_total                shape     1                   1                   -                   
+Altmu                    shape     -                   -                   1                   
+DDmu                     shape     -                   -                   1                   
+TFmu                     shape     -                   -                   1                   
+TT_Mtt_mu                shape     -                   -                   1                   
+WJets_mu                 shape     -                   -                   1                   
+ST_mu                    shape     -                   -                   1                   
+AltTFmu                  shape     -                   -                   1                   
+DD_mu_rate          rateParam           CR0B_muon_2020      DDFitWJetsTT_MttST  1                   
+
