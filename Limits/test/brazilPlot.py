@@ -313,11 +313,11 @@ cmsTextFont   = 61;
 cmsTextSize      = 0.75;
 
 #lumiText = ROOT.TString("41.5 fb^{-1} (13 TeV)")
-lumiText = "137.19 fb^{-1} (13 TeV)"
+lumiText = "138 fb^{-1} (13 TeV)"
 if (opt.year == "2016"):lumiText = "35.92 fb^{-1} (13 TeV)"
 elif (opt.year == "2017"):lumiText = "41.53 fb^{-1} (13 TeV)"
 elif (opt.year == "2018"):lumiText = "59.74 fb^{-1} (13 TeV)"
-elif (opt.year == "Run2"):lumiText = "137.19 fb^{-1} (13 TeV)"
+elif (opt.year == "Run2"):lumiText = "138 fb^{-1} (13 TeV)"
 latex_lumi = ROOT.TLatex();
 latex_lumi.SetNDC();
 latex_lumi.SetTextAngle(0);

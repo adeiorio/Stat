@@ -1,13 +1,14 @@
 import os
 
-folder = '17Jul21_dd_summedyears_SR_explin_v4'
+folder = '19Jen22_dd_summedyears_SR_explin_v18_LH_wp30'
 year = '2020'
 histo_rep = '/eos/user/a/adeiorio/Wprime/nosynch/v17/plot_fit_ddsummed_explin_bis/'
 histo_rep = '/eos/user/a/adeiorio/Wprime/nosynch/v17/plot_fit_ddsummed_explin_v4/'
-histo_rep = '/eos/user/a/adeiorio/Wprime/nosynch/v17/plot_fit_ddsummed_explin_v3/'
+histo_rep = '/eos/home-o/oiorio/Wprime/nosynch/v18/plot_explin_fit/'
+histo_rep = '/eos/user/a/adeiorio/Wprime/nosynch//v18/plot_fit/'
 fit = 1
 fit_diag = 0
-impact = 1
+impact = 0
 pull = 0
 gof = 0
 unblind = 0
@@ -21,14 +22,14 @@ if fit:
         os.system('python getLimitData.py -d ' + folder) #--runSingleCat
         os.system('python brazilPlot.py  -l ' + folder + ' -o' + ' -y ' + str(year)) #--runSingleCat
     else:
-        os.system('python collectHistos.py -i ' + histo_rep + ' -o histo' + str(year) + '.root')
+        #os.system('python collectHistos.py -i ' + histo_rep + ' -o histo' + str(year) + '.root')
         os.system('python createDatacards.py -i histo' + str(year) + '.root -d  ' + folder)
         #python runCombine.py -c SR_$year -y $year -d  ' + folder + ' --runSingleCat -m hist
         os.system('python runCombine.py -y ' + str(year) + ' -d ' + folder + ' -m hist') #--runSingleCat
         os.system('python getLimitData.py -d ' + folder) #--runSingleCat
         os.system('python brazilPlot.py  -l ' + folder + ' -y ' + str(year)) #--runSingleCat
 
-signal = 'WP_M2000W20_RH'
+signal = 'WP_M4000W40_RH'
 metadatacard_out = folder + '/' + signal +'/'+ signal + '_hist'
 
 #do fit diagonistics

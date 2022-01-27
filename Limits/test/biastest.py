@@ -19,10 +19,12 @@ folder = '05Jul21_dd_summedyears_SR'
 folder = '07Jul21_dd_summedyears_CR_explin'
 folder = '07Jul21_dd_summedyears_SR_explin_bis_test/'
 folder = '12Jul21_dd_summedyears_SR_explin_v3'
+folder = '19Jul21_dd_summedyears_SR_explin_v6'
+#folder = '19Jul21_dd_summedyears_SR_explin_v6_noAltTF'
 
 mass_points = ['WP_M2000W20_RH', 'WP_M4000W40_RH', 'WP_M6000W60_RH']
 signifs = ["","_1s","_limit","_3s","_5s"]
-r_in = {'WP_M2000W20_RH':[0, 1, 3, 5, 10], 'WP_M4000W40_RH':[0, 1, 3, 5, 10], 'WP_M6000W60_RH':[0, 1, 5, 10, 20]}
+r_in = {'WP_M2000W20_RH':[0, 0.008, 0.0025, 0.042], 'WP_M4000W40_RH':[0, 0.1, 0.32, 0.6], 'WP_M6000W60_RH':[0, 1.1, 4.3, 8.5]}
 
 ntoys = '200'
 pulls=[[-100 for m in xrange(len(signifs))] for r in xrange(len(mass_points))]
@@ -87,7 +89,7 @@ for mi in xrange(0, len(mass_points)):
                 h.Draw("E")
                 func.Draw("SAME")
                 c1.Update()
-                c1.SaveAs("pulls_"+str(r)+"_"+mass_point+suffix+"_v17.png")
+                c1.SaveAs("pulls_"+str(r).replace('.', 'p')+"_"+mass_point+suffix+"_v17.png")
             pulls_fit[mi][ri] = func.GetParameter(1)
             sigmas_fit[mi][ri] = func.GetParameter(2)
             pulls[mi][ri] = h.GetMean()
