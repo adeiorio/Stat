@@ -9,6 +9,7 @@ ROOT.gROOT.SetBatch()        # don't pop up canvases
 #ROOT.TH1.AddDirectory(False)
 from array import array
 from Stat.Limits.samples import *
+#from Stat.Limits.samples_gen import *
 from Stat.Limits.settings import *
 
 class limit(object):
@@ -173,14 +174,11 @@ if theo:
 #print "Error bars u2: ", ebar_u2
 #print "Error bars xsec u2: ", y_bars_u2
 
-
 x_bars_1 = array('f', [0]*len(l.v))
 x_bars_2 = array('f', [0]*len(l.v))
 
 # need to pick up 
 #y_theo = [ s.sigma for s in samples]
-
-
 
 print xvalues
 print obs_values
@@ -251,18 +249,20 @@ legend = ROOT.TLegend(0.485,0.5,0.93,0.90)
 legend.SetTextSize(0.039);
 legend.SetFillStyle(0);
 legend.SetBorderSize(0);
-legend.SetHeader("95% CL upper limits");
+legend.AddEntry(theory, "Theoretical #sigma");
+legend.AddEntry(None, "95% CL upper limits", "")
+#legend.SetHeader("95% CL upper limits");
 # uncomment for ob as well
 
 #legend.AddEntry(obs,"Observed","ex0p");
-if(addobserved):
-    legend.AddEntry(obs,"CL_{S} sign. injected");
-if(opt.compare!=""):
-    legend.AddEntry(com,"alternative model");
 legend.AddEntry(median,"Median expected");
 legend.AddEntry(band_1sigma,"68% expected");
 legend.AddEntry(band_2sigma,"95% expected");
-legend.AddEntry(theory, "Theoretical #sigma");
+if(addobserved):
+    #legend.AddEntry(obs,"CL_{S} sign. injected");
+    legend.AddEntry(obs,"Observed");
+if(opt.compare!=""):
+    legend.AddEntry(com,"alternative model");
 # m_legend.AddEntry(theo, "Theoretical #sigma");
 legend.SetEntrySeparation(0.3);
 legend.SetFillColor(0);
@@ -270,7 +270,7 @@ legend.SetFillColor(0);
 c1 = ROOT.TCanvas()
 ROOT.SetOwnership(c1, False)
 c1.cd()
-c1.SetGrid() 
+#c1.SetGrid() 
 c1.SetLogy(1)
 maxY=med_values[0]+y_bars_u2[0]
 minY=med_values[-1]+y_bars_d2[-1]
@@ -293,7 +293,7 @@ if(opt.compare!=""):
 theory.Draw("L same");
 legend.Draw("Same");
 
-lumiTextSize     = 0.6;
+lumiTextSize     = 0.9;
 lumiTextOffset   = 0.2;
 # float cmsTextSize      = 0.75;
 # float cmsTextOffset    = 0.1;  // only used in outOfFrame version
@@ -353,8 +353,9 @@ l_preliminary.SetTextAlign(31); # align right
 l_preliminary.SetTextSize(lumiTextSize*t*0.65);
 l_preliminary.SetTextFont(52);
 l_preliminary.SetTextAlign(11); # align left
-l_preliminary.DrawLatex(0.17,1-t+lumiTextOffset*t,"Work in progress");
-l_preliminary.DrawLatex(0.13, 0.81,"");
+#l_preliminary.DrawLatex(0.17,1-t+lumiTextOffset*t,"Work in progress")
+l_preliminary.DrawLatex(0.17,1-t+lumiTextOffset*t,"")
+l_preliminary.DrawLatex(0.13, 0.81,"")
 
 #l_label = ROOT.TLatex();
 #l_label.SetNDC();
