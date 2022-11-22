@@ -43,17 +43,19 @@ m " + mZprime + " SVJ_mZprime" + mZprime + "_mDark" + mDark + "_rinv" + rinv + "
 
 
 
-def runSinglePointWprime(path_, mWprime, width, chir, categories, method, runSingleCat):
+def runSinglePointWprime(path_, mWprime, width, chir, categories, method, runSingleCat, unblind):
     mass=mWprime
     print "evaluate limit for mWprime = ", mWprime, " GeV"
     path = ("%s/WP_M%sW%s_%s" % (path_, mass, width, chir) )
     print "==>path: ", path
     print os.path.exists(path)
+    extraoption = " -t -1 "    
+    if unblind:
+        extraoption=""
     if(os.path.exists(path)):
         print "ok i'm in the directory"
         os.chdir(path)
         print "We are in the right folder ",  len(categories)
-        extraoption=""
         if len(categories)>=1:
             if len(years)>1:
                 cmd = "combineCards.py "
